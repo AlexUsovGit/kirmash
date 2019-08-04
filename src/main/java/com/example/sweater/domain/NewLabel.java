@@ -1,6 +1,5 @@
 package com.example.sweater.domain;
 
-import com.example.sweater.export.Exports;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 

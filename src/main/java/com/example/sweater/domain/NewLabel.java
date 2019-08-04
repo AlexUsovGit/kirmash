@@ -1,5 +1,6 @@
 package com.example.sweater.domain;
 
+import com.example.sweater.export.Exports;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 
@@ -128,7 +129,8 @@ public class NewLabel {
             e.printStackTrace();
         }
         // Font font = FontFactory.getFont(String.valueOf(Font.FontFamily.TIMES_ROMAN), "Cp1250", true);
-        Font font = new Font(/*Font.FontFamily.HELVETICA*/ bf, 4.4f, Font.NORMAL);
+        Font font = new Font(/*Font.FontFamily.HELVETICA*/ bf, 4.1f, Font.NORMAL);
+        Font font10 = new Font(/*Font.FontFamily.HELVETICA*/ bf, 10.0f, Font.NORMAL);
         PdfPCell cell;
 
         float[] columnWidths = {1.9F, 5.1F};
@@ -144,51 +146,58 @@ public class NewLabel {
         cell = new PdfPCell(new Phrase("Импортер в Беларусь", font));
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(product.getImporter(), font));
-        cell.setFixedHeight(23);
+        cell.setFixedHeight(18);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Производитель", font));
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(product.getManufacturer(), font));
-        cell.setFixedHeight(23);
+        cell.setFixedHeight(20);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Торговая марка", font));
         cell.setFixedHeight(13);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(product.getTrademark(), font));
+
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Наименование", font));
+        cell.setFixedHeight(13);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(product.getProductName() + " " + product.getGender(), font));
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Артикул", font));
+        cell.setFixedHeight(8);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(product.getArticle(), font));
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Состав материала", font));
+        cell.setFixedHeight(13);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(product.getComposition(), font));
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Размер", font));
+        cell.setFixedHeight(10);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("", font));
         table.addCell(cell);
 
         cell = new PdfPCell(new Phrase("Дата выпуска", font));
-        cell.setFixedHeight(13);
+        cell.setFixedHeight(12);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(product.getStringDate(), font));
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Символы ухода", font));
+        cell.setFixedHeight(12);
         table.addCell(cell);
         cell = createImageCell("symbols.png");
         cell.setPaddingLeft(4);
         cell.setPaddingTop(2);
+        cell.setPaddingBottom(2);
         cell.setPaddingRight(4);
         cell.setFixedHeight(10);
         table.addCell(cell);
         cell = createImageCell("eac.jpg");
 
-        cell.setPaddingLeft(5);
+        cell.setPaddingLeft(8);
         cell.setPaddingTop(3);
         cell.setPaddingBottom(3);
         cell.setPaddingRight(3);
@@ -201,9 +210,10 @@ public class NewLabel {
         cell.setFixedHeight(20);
         table.addCell(cell);
 
-        cell = new PdfPCell(new Phrase("Цена", font));
+        cell = new PdfPCell(new Phrase("Цена", font10));
+        cell.setFixedHeight(12);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase(product.getRetailPrice() + " BYN", font));
+        cell = new PdfPCell(new Phrase(product.getRetailPrice() + " BYN", font10));
         table.addCell(cell);
 
         // cell = new PdfPCell(new Phrase("Штрихкод",font));
@@ -239,7 +249,8 @@ public class NewLabel {
 
         //---------------------------------------------------------------
 
-
+       /* Exports exports = new Exports();
+        exports.createXlsx();*/
         return myByteFile;
 
     }
